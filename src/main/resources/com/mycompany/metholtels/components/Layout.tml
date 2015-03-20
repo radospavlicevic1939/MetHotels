@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+>
+    <head>
+        <meta charset="utf-8" />
+        <title>MetHotels</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>        
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="../assets/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Fav and touch icons -->
+        <!--    <link rel="shortcut icon" page="${asset:context:/favicon.ico}" />-->
+    </head>
+
+    <body>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">                        
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo">
+                        <t:pagelink page="Index" class="navbar-brand"></t:pagelink>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <t:pagelink page="">Pocetna</t:pagelink>
+                        </li>
+                        <li>
+                            <t:pagelink page="">O nama</t:pagelink>
+                        </li>						
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ponude</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <t:pagelink page="">Polupansion</t:pagelink>
+                                </li>
+                                <li>
+                                    <t:pagelink page="">Pansion</t:pagelink>
+                                </li>
+                                <li>
+                                    <t:pagelink page="">All inclusive</t:pagelink>
+                                </li>						
+                            </ul>
+                        </li>
+                        <li>
+                            <t:pagelink page="">Rezervacije</t:pagelink>
+                        </li>
+                        <li>
+                            <t:pagelink page="DodajSobe">Sobe</t:pagelink>
+                        </li>
+                        <li>
+                            <t:pagelink page="">Kontakt</t:pagelink>
+                        </li>													
+                    </ul>
+                    <div class="nav navbar-nav navbar-right">
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search"/>
+                            </div>
+                            <button type="submit" class="btn btn-default">Pronadji</button>
+                        </form>
+                    </div>                    
+                </div>
+            </nav>                                          
+        <t:body/>
+        <footer>           
+        </footer>
+
+    </body>
+</html>
