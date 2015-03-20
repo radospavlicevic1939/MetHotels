@@ -41,7 +41,7 @@
                             <t:pagelink page="">O nama</t:pagelink>
                         </li>						
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ponude</a>
+                            <t:pagelink page="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ponude</t:pagelink>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <t:pagelink page="">Polupansion</t:pagelink>
