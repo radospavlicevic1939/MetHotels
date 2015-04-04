@@ -1,4 +1,4 @@
-package com.mycompany.metholtels.components;
+package com.mycompany.methotels.components;
 
 import org.apache.tapestry5.annotations.*;
 

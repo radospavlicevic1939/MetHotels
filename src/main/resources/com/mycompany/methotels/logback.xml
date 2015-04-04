@@ -5,7 +5,7 @@
         </layout>
     </appender>
 
-    <logger name="com.mycompany.metholtels" level="TRACE"/>
+    <logger name="com.mycompany.methotels" level="TRACE"/>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

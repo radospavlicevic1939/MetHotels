@@ -1,4 +1,4 @@
-description = "MetHoltels application"
+description = "MetHotels application"
 
 apply plugin: "war"
 apply plugin: "java"
@@ -51,8 +51,8 @@ sourceSets {
     main {
         compileClasspath += [configurations.provided]
         // To give the same path as IDEA has
-        // output.resourcesDir = 'build/production/MetHoltels'
-        // output.classesDir = 'build/production/MetHoltels'
+        // output.resourcesDir = 'build/production/MetHotels'
+        // output.classesDir = 'build/production/MetHotels'
     }
     test {
         compileClasspath += [configurations.provided]

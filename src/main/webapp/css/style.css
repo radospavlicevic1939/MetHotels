@@ -1,130 +1,137 @@
 body, #myCarousel{
-	background:rgb(208, 208, 208);	
+    background:rgb(208, 208, 208);	
 }
 .container {
-	width: auto;
-	max-width: 100%;
+    width: auto;
+    max-width: 100%;
 }
 .carousel-inner>.item>img{
-	width:90%;
-	height: 480px;	
+    width:90%;
+    height: 480px;	
 }
 .navbar-default{
-	background: #C3C7C8;
-	margin:0px;
-	height: 55px;
+    background: #C3C7C8;
+    margin:0px;
+    height: 55px;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a{
-	font-weight: bold;
+    font-weight: bold;
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-	z-index: 9999;
-	position: relative;
+    z-index: 9999;
+    position: relative;
 }
 
 .logo{
-	margin-left: 70px;
-	width:150px;
-	height: 90px;
-	background: url("../images/logo.png") no-repeat;
-	float:left;
+    margin-left: 70px;
+    width:150px;
+    height: 90px;
+    background: url("../images/logo.png") no-repeat;
+    float:left;
 }
 .nav>li{
-	margin: 0px 0 0 10px;
+    margin: 0px 0 0 10px;
 }
 
 .item {
-	text-align: center;
+    text-align: center;
 }
 
 .carousel-inner>.item{
-	text-align: center;
+    text-align: center;
 }
 
 .carousel-inner>.item>img {
-	display: inline-block;
+    display: inline-block;
 }
 
 #myCarousel, .carousel .slide{
-	z-index: 0;
+    z-index: 0;
 }
 
-.form-control:focus{	
-	border: 1px solid darkgray;
-	box-shadow: 0px 1px 3px gray;
+.form-control:focus{        
+    border: 1px solid darkgray;
+    box-shadow: 0px 1px 3px gray;
 }
 
 .btn-default:focus{
-	border: 2px solid darkgray;
+    border: 2px solid darkgray;
 }
 
 .news{
-	position: relative;
-	text-align: center;
-	height: 225px;
-	margin-top: 10px;
-	padding: 0;
+    position: relative;
+    text-align: center;
+    height: 225px;
+    margin-top: 10px;
+    padding: 0;
 }
 
 .center{
-	text-align: center;
+    text-align: center;
 }
 
 .row h1{	
-	color:#373737;
+    color:#373737;
 }
 .news a{
-	color:#C3C7C8;
+    color:#C3C7C8;
 }
 .row .news h1{		
-	margin:auto;
-	width: inherit;	
-	background: rgba(6, 6, 6, 0.7);	
+    margin:auto;
+    width: inherit;	
+    background: rgba(6, 6, 6, 0.7);	
 }
 
 .news h1:hover{
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 .news1{
-	background: url("../images/food.jpeg");
-	
+    background: url("../images/food.jpeg");
+
 }
 .news2{
-	background: url("../images/court.jpg");
+    background: url("../images/court.jpg");
 }
 .news3{
-	background: url("../images/spool.jpg");
+    background: url("../images/spool.jpg");
 }
 .news{
-	background-position: center;
-	background-repeat: no-repeat;	
+    background-position: center;
+    background-repeat: no-repeat;	
 }
 
 footer{	
-	position:relative;	
-	background: url("../images/footerLogo.png") no-repeat center;
-	height: 100px;
+    position:relative;	
+    background: url("../images/footerLogo.png") no-repeat center;
+    height: 100px;
 }
 
 @media (max-width: 1092px){
-	.navbar-right{
-		float:left !important;
-	}
+    .navbar-right{
+        float:left !important;
+    }
 }
 
 @media (max-width: 768px){
-	.navbar-nav{
-		background: #C3C7C8;
-		margin: 0;
-	}
-	.navbar-right{
-		display: none;
-	}
-	.news{
-		margin: 20px 15%;
-	}
-	.nav>li{
-		margin-top: 8px;
-	}
+    .navbar-nav{
+        background: #C3C7C8;
+        margin: 0;
+    }
+    .navbar-right{
+        display: none;
+    }
+    .news{
+        margin: 20px 15%;
+    }
+    .nav>li{
+        margin-top: 8px;
+    }
+}
+.form-group{
+    margin-top: 20px;
+}
+
+.navbar-form .form-control{
+    margin: -20px 5px 2px 0px;
 }
