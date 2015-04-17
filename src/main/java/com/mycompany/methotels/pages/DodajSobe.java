@@ -18,39 +18,39 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  *
  * @author Rados
  */
-public class DodajSobe {    
-    
+public class DodajSobe {
+
     @Property
     private List<Sobe> sobeLista;
-    
+
     @Inject
-    private SobeDao sobeDao;        
-    
+    private SobeDao sobeDao;
+
     @Property
     private Sobe tmpsoba;
-    
+
     @Property
     private Sobe soba;
-    
-    void onActivate(){
-        if(sobeLista == null){
+
+    void onActivate() {
+        if (sobeLista == null) {
             sobeLista = new ArrayList<Sobe>();
-        }    
+        }
         // createCriteria metoda pravi Select * upit nad prosledjenom klasom
         sobeLista = (List<Sobe>) sobeDao.getListaSoba();
     }
-    
+
     @CommitAfter
-    Object onSuccess(){
+    Object onSuccess() {
         // persist metoda cuva objekat u bazi podataka
         sobeDao.dodajSobu(soba);
         return this;
     }
-    
+
     @CommitAfter
-    Object onDelete(int id){
+    Object onDelete(int id) {
         sobeDao.obrisiSobu(id);
         return this;
     }
-        
+
 }

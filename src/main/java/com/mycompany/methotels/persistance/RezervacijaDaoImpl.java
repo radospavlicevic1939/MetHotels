@@ -19,7 +19,7 @@ public class RezervacijaDaoImpl implements RezervacijaDao {
 
     @Inject
     private Session session;
-    
+
     @Override
     public List<Rezervacije> getListaRezervacija() {
         return session.createCriteria(Rezervacije.class).list();
@@ -40,5 +40,5 @@ public class RezervacijaDaoImpl implements RezervacijaDao {
         Rezervacije exRezervacija = (Rezervacije) session.createCriteria(Rezervacije.class).add(Restrictions.eq("id", id)).uniqueResult();
         session.delete(exRezervacija);
     }
-    
+
 }

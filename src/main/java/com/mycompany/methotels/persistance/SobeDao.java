@@ -13,8 +13,12 @@ import java.util.List;
  * @author Rados
  */
 public interface SobeDao {
+
     public List<Sobe> getListaSoba();
+
     public Sobe getSobaById(Integer id);
+
     public void dodajSobu(Sobe soba);
+
     public void obrisiSobu(int id);
 }

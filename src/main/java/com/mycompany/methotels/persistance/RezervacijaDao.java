@@ -13,8 +13,12 @@ import java.util.List;
  * @author Rados
  */
 public interface RezervacijaDao {
+
     public List<Rezervacije> getListaRezervacija();
+
     public Rezervacije getRezervacijaById(Integer id);
+
     public void dodajRezervaciju(Rezervacije soba);
+
     public void obrisiRezervaciju(int id);
 }

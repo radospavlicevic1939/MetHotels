@@ -67,7 +67,7 @@ public class Rezervisanje {
     }
 
     public String getSobaIme() {
-        if (tmprezervacija.getSobaId() != null) {            
+        if (tmprezervacija.getSobaId() != null) {
             return tmprezervacija.getSobaId().getIme();
         } else {
             return "";

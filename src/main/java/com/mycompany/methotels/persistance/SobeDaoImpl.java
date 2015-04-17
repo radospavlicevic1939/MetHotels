@@ -20,11 +20,11 @@ public class SobeDaoImpl implements SobeDao {
 
     @Inject
     private Session session;
-    
+
     @Override
-    public List<Sobe> getListaSoba() {        
+    public List<Sobe> getListaSoba() {
         List<Sobe> listaSoba = session.createCriteria(Sobe.class).list();
-        if(listaSoba == null){
+        if (listaSoba == null) {
             return new ArrayList<Sobe>();
         }
         return listaSoba;
@@ -45,5 +45,5 @@ public class SobeDaoImpl implements SobeDao {
         Sobe exSoba = (Sobe) session.createCriteria(Sobe.class).add(Restrictions.eq("id", id)).uniqueResult();
         session.delete(exSoba);
     }
-    
+
 }
