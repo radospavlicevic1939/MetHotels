@@ -6,18 +6,20 @@
 package com.mycompany.methotels.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
@@ -25,10 +27,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * @author Rados
  */
 @Entity
-@Table(name = "sobe")
+@Table(name = "rezervacije")
 @NamedQueries({
-    @NamedQuery(name = "Sobe.findAll", query = "SELECT s FROM Sobe s")})
-public class Sobe implements Serializable {
+    @NamedQuery(name = "Rezervacije.findAll", query = "SELECT r FROM Rezervacije r")})
+public class Rezervacije implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,35 +41,33 @@ public class Sobe implements Serializable {
     @Column(name = "ime")
     private String ime;
     @Basic(optional = false)
-    @Column(name = "sprat")
-    private int sprat;
+    @Column(name = "prezime")
+    private String prezime;
     @Basic(optional = false)
-    @Column(name = "tv")
-    private boolean tv;
+    @Column(name = "datum")
+    @Temporal(TemporalType.DATE)
+    private Date datum;
     @Basic(optional = false)
-    @Column(name = "internet")
-    private boolean internet;
-    @Basic(optional = false)
-    @Column(name = "djakuzi")
-    private boolean djakuzi;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sobaId")
-    private List<Rezervacije> rezervacijeList;
+    @Column(name = "broj_dana")
+    private int brojDana;
+    @JoinColumn(name = "soba_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Sobe sobaId;
 
     @Inject
-    public Sobe() {
+    public Rezervacije() {
     }
 
-    public Sobe(Integer id) {
+    public Rezervacije(Integer id) {
         this.id = id;
     }
 
-    public Sobe(Integer id, String ime, int sprat, boolean tv, boolean internet, boolean djakuzi) {
+    public Rezervacije(Integer id, String ime, String prezime, Date datum, int brojDana) {
         this.id = id;
         this.ime = ime;
-        this.sprat = sprat;
-        this.tv = tv;
-        this.internet = internet;
-        this.djakuzi = djakuzi;
+        this.prezime = prezime;
+        this.datum = datum;
+        this.brojDana = brojDana;
     }
 
     public Integer getId() {
@@ -86,44 +86,36 @@ public class Sobe implements Serializable {
         this.ime = ime;
     }
 
-    public int getSprat() {
-        return sprat;
+    public String getPrezime() {
+        return prezime;
     }
 
-    public void setSprat(int sprat) {
-        this.sprat = sprat;
+    public void setPrezime(String prezime) {
+        this.prezime = prezime;
     }
 
-    public boolean getTv() {
-        return tv;
+    public Date getDatum() {
+        return datum;
     }
 
-    public void setTv(boolean tv) {
-        this.tv = tv;
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
 
-    public boolean getInternet() {
-        return internet;
+    public int getBrojDana() {
+        return brojDana;
     }
 
-    public void setInternet(boolean internet) {
-        this.internet = internet;
+    public void setBrojDana(int brojDana) {
+        this.brojDana = brojDana;
     }
 
-    public boolean getDjakuzi() {
-        return djakuzi;
+    public Sobe getSobaId() {
+        return sobaId;
     }
 
-    public void setDjakuzi(boolean djakuzi) {
-        this.djakuzi = djakuzi;
-    }
-
-    public List<Rezervacije> getRezervacijeList() {
-        return rezervacijeList;
-    }
-
-    public void setRezervacijeList(List<Rezervacije> rezervacijeList) {
-        this.rezervacijeList = rezervacijeList;
+    public void setSobaId(Sobe sobaId) {
+        this.sobaId = sobaId;
     }
 
     @Override
@@ -136,10 +128,10 @@ public class Sobe implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sobe)) {
+        if (!(object instanceof Rezervacije)) {
             return false;
         }
-        Sobe other = (Sobe) object;
+        Rezervacije other = (Rezervacije) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -148,7 +140,7 @@ public class Sobe implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.methotels.entities.Sobe[ id=" + id + " ]";
+        return "com.mycompany.methotels.entities.Rezervacije[ id=" + id + " ]";
     }
     
 }

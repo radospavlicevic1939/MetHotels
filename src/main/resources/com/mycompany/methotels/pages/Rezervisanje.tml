@@ -1,0 +1,23 @@
+<html t:type="layout" title="MetHotels Index"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <t:beaneditform t:id="rezervacijeForma" object="rezervacija" exclude="id" add="soba" >
+        <p:soba>
+            <t:label for="soba">Soba:</t:label>
+            <t:select t:id="soba" model="sobaModel" value="soba" />
+            <br/>
+        </p:soba>
+    </t:beaneditform>
+    
+    <t:grid source="rezervacijeLista" exclude="id" add="soba, delete" row="tmprezervacija">        
+        <p:sobaCell>
+            ${sobaIme}
+        </p:sobaCell>
+        <p:deleteCell>
+            <t:eventlink t:event="delete" context="tmprezervacija.id">Delete</t:eventlink>
+        </p:deleteCell>
+    </t:grid>
+    
+</html>

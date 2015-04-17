@@ -7,12 +7,12 @@ package com.mycompany.methotels.pages;
 
 //import com.mycompany.methotels.data.Soba;
 import com.mycompany.methotels.entities.Sobe;
+import com.mycompany.methotels.persistance.SobeDao;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.hibernate.Session;
 
 /**
  *
@@ -24,7 +24,10 @@ public class DodajSobe {
     private List<Sobe> sobeLista;
     
     @Inject
-    private Session session;
+    private SobeDao sobeDao;        
+    
+    @Property
+    private Sobe tmpsoba;
     
     @Property
     private Sobe soba;
@@ -33,14 +36,21 @@ public class DodajSobe {
         if(sobeLista == null){
             sobeLista = new ArrayList<Sobe>();
         }    
-        // createCriteria metoda pravi Select * upit nad prosle?enom klasom
-        sobeLista = (List<Sobe>) session.createCriteria(Sobe.class).list();
+        // createCriteria metoda pravi Select * upit nad prosledjenom klasom
+        sobeLista = (List<Sobe>) sobeDao.getListaSoba();
     }
     
     @CommitAfter
     Object onSuccess(){
-        // persist metoda cuva objekatu bazi podataka
-        session.persist(soba);        
+        // persist metoda cuva objekat u bazi podataka
+        sobeDao.dodajSobu(soba);
         return this;
     }
+    
+    @CommitAfter
+    Object onDelete(int id){
+        sobeDao.obrisiSobu(id);
+        return this;
+    }
+        
 }

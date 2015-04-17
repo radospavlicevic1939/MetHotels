@@ -55,7 +55,7 @@
                             </ul>
                         </li>
                         <li>
-                            <t:pagelink page="">Rezervacije</t:pagelink>
+                            <t:pagelink page="Rezervisanje">Rezervacije</t:pagelink>
                         </li>
                         <li>
                             <t:pagelink page="DodajSobe">Sobe</t:pagelink>

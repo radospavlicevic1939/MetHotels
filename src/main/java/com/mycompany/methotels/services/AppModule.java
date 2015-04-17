@@ -1,5 +1,9 @@
 package com.mycompany.methotels.services;
 
+import com.mycompany.methotels.persistance.RezervacijaDao;
+import com.mycompany.methotels.persistance.RezervacijaDaoImpl;
+import com.mycompany.methotels.persistance.SobeDao;
+import com.mycompany.methotels.persistance.SobeDaoImpl;
 import java.io.IOException;
 
 import org.apache.tapestry5.*;
@@ -11,9 +15,6 @@ import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.*;
-import org.apache.tapestry5.services.javascript.JavaScriptStack;
-import org.apache.tapestry5.services.javascript.StackExtension;
-import org.apache.tapestry5.services.javascript.StackExtensionType;
 import org.slf4j.Logger;
 
 /**
@@ -23,7 +24,10 @@ import org.slf4j.Logger;
 public class AppModule
 {
     public static void bind(ServiceBinder binder)
-    {
+    {        
+        binder.bind(SobeDao.class, SobeDaoImpl.class);
+        binder.bind(RezervacijaDao.class, RezervacijaDaoImpl.class);
+
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.

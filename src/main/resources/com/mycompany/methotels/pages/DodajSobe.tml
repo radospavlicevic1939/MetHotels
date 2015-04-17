@@ -4,6 +4,10 @@
       xmlns:p="tapestry:parameter">
 
     <t:beaneditform object="soba" exclude="id"/>
-    <t:grid t:source="sobeLista" exclude="id"/>
+    <t:grid t:source="sobeLista" exclude="id" add="delete" row="tmpsoba">
+        <p:deleteCell>
+            <t:eventlink t:event="delete" context="tmpsoba.id">Delete</t:eventlink>
+        </p:deleteCell>
+    </t:grid>
 
 </html>
