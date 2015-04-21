@@ -5,21 +5,19 @@
  */
 package com.mycompany.methotels.entities;
 
+import com.mycompany.methotels.data.Rola;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
@@ -27,10 +25,11 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * @author Rados
  */
 @Entity
-@Table(name = "rezervacije")
+@Table(name = "korisnik")
 @NamedQueries({
-    @NamedQuery(name = "Rezervacije.findAll", query = "SELECT r FROM Rezervacije r")})
-public class Rezervacije implements Serializable {
+    @NamedQuery(name = "Korisnik.findAll", query = "SELECT k FROM Korisnik k")})
+public class Korisnik implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,31 +43,31 @@ public class Rezervacije implements Serializable {
     @Column(name = "prezime")
     private String prezime;
     @Basic(optional = false)
-    @Column(name = "datum")
-    @Temporal(TemporalType.DATE)
-    private Date datum;
+    @Column(name = "username")
+    private String username;
     @Basic(optional = false)
-    @Column(name = "broj_dana")
-    private int brojDana;
-    @JoinColumn(name = "soba_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Sobe sobaId;
+    @Column(name = "password")
+    private String password;
+    @Basic(optional = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rola")
+    private Rola rola;
 
-    
     @Inject
-    public Rezervacije() {
+    public Korisnik() {
     }
 
-    public Rezervacije(Integer id) {
+    public Korisnik(Integer id) {
         this.id = id;
     }
 
-    public Rezervacije(Integer id, String ime, String prezime, Date datum, int brojDana) {
+    public Korisnik(Integer id, String ime, String prezime, String username, String password, Rola rola) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
-        this.datum = datum;
-        this.brojDana = brojDana;
+        this.username = username;
+        this.password = password;
+        this.rola = rola;
     }
 
     public Integer getId() {
@@ -95,28 +94,28 @@ public class Rezervacije implements Serializable {
         this.prezime = prezime;
     }
 
-    public Date getDatum() {
-        return datum;
+    public String getUsername() {
+        return username;
     }
 
-    public void setDatum(Date datum) {
-        this.datum = datum;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getBrojDana() {
-        return brojDana;
+    public String getPassword() {
+        return password;
     }
 
-    public void setBrojDana(int brojDana) {
-        this.brojDana = brojDana;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Sobe getSobaId() {
-        return sobaId;
+    public Rola getRola() {
+        return rola;
     }
 
-    public void setSobaId(Sobe sobaId) {
-        this.sobaId = sobaId;
+    public void setRola(Rola rola) {
+        this.rola = rola;
     }
 
     @Override
@@ -129,10 +128,10 @@ public class Rezervacije implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rezervacije)) {
+        if (!(object instanceof Korisnik)) {
             return false;
         }
-        Rezervacije other = (Rezervacije) object;
+        Korisnik other = (Korisnik) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -141,7 +140,7 @@ public class Rezervacije implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.methotels.entities.Rezervacije[ id=" + id + " ]";
+        return "com.mycompany.methotels.entities.Korisnik[ id=" + id + " ]";
     }
-    
+
 }

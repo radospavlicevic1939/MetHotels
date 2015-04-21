@@ -9,7 +9,9 @@ import com.mycompany.methotels.entities.Rezervacije;
 import com.mycompany.methotels.entities.Sobe;
 import com.mycompany.methotels.persistance.RezervacijaDao;
 import com.mycompany.methotels.persistance.SobeDao;
+import com.mycompany.methotels.services.ProtectedPage;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
@@ -20,6 +22,8 @@ import org.apache.tapestry5.services.SelectModelFactory;
  *
  * @author Rados
  */
+@ProtectedPage
+@RolesAllowed(value={"Admin"})
 public class Rezervisanje {
 
     @Inject

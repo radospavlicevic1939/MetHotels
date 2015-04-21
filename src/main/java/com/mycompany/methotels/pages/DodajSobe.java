@@ -8,8 +8,10 @@ package com.mycompany.methotels.pages;
 //import com.mycompany.methotels.data.Soba;
 import com.mycompany.methotels.entities.Sobe;
 import com.mycompany.methotels.persistance.SobeDao;
+import com.mycompany.methotels.services.ProtectedPage;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -18,6 +20,8 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  *
  * @author Rados
  */
+@ProtectedPage
+@RolesAllowed(value={"Admin"})
 public class DodajSobe {
 
     @Property
