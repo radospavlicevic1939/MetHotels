@@ -5,16 +5,10 @@
  */
 package com.mycompany.methotels.pages;
 
-//import com.mycompany.methotels.data.Soba;
+import com.mycompany.methotels.components.GenericEditor;
 import com.mycompany.methotels.entities.Sobe;
-import com.mycompany.methotels.persistance.SobeDao;
 import com.mycompany.methotels.services.ProtectedPage;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.security.RolesAllowed;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
  *
@@ -22,39 +16,5 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  */
 @ProtectedPage
 @RolesAllowed(value={"Admin"})
-public class DodajSobe {
-
-    @Property
-    private List<Sobe> sobeLista;
-
-    @Inject
-    private SobeDao sobeDao;
-
-    @Property
-    private Sobe tmpsoba;
-
-    @Property
-    private Sobe soba;
-
-    void onActivate() {
-        if (sobeLista == null) {
-            sobeLista = new ArrayList<Sobe>();
-        }
-        // createCriteria metoda pravi Select * upit nad prosledjenom klasom
-        sobeLista = (List<Sobe>) sobeDao.getListaSoba();
-    }
-
-    @CommitAfter
-    Object onSuccess() {
-        // persist metoda cuva objekat u bazi podataka
-        sobeDao.dodajSobu(soba);
-        return this;
-    }
-
-    @CommitAfter
-    Object onDelete(int id) {
-        sobeDao.obrisiSobu(id);
-        return this;
-    }
-
+public class DodajSobe extends GenericEditor<Sobe>{
 }

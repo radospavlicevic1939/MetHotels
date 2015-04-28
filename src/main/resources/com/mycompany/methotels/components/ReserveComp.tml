@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+>    
+    <t:content>
+        <div class="reserveCont">
+            <h1>${ime}</h1>
+            <p>${soba}</p>
+            <p class="price">${cena}</p>
+        </div>
+    </t:content>
+        
+</html>

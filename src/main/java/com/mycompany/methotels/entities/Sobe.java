@@ -11,9 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,13 +25,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 @Table(name = "sobe")
 @NamedQueries({
     @NamedQuery(name = "Sobe.findAll", query = "SELECT s FROM Sobe s")})
-public class Sobe implements Serializable {
+public class Sobe extends AbstractEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+   
     @Basic(optional = false)
     @Column(name = "ime")
     private String ime;
@@ -50,6 +43,9 @@ public class Sobe implements Serializable {
     @Basic(optional = false)
     @Column(name = "djakuzi")
     private boolean djakuzi;
+    @Basic(optional = false)
+    @Column(name = "cena")
+    private Integer cena;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sobaId")
     private List<Rezervacije> rezervacijeList;
 
@@ -117,6 +113,14 @@ public class Sobe implements Serializable {
     public void setDjakuzi(boolean djakuzi) {
         this.djakuzi = djakuzi;
     }
+
+    public Integer getCena() {
+        return cena;
+    }
+
+    public void setCena(Integer cena) {
+        this.cena = cena;
+    }        
 
     public List<Rezervacije> getRezervacijeList() {
         return rezervacijeList;

@@ -12,9 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,14 +25,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 @Table(name = "korisnik")
 @NamedQueries({
     @NamedQuery(name = "Korisnik.findAll", query = "SELECT k FROM Korisnik k")})
-public class Korisnik implements Serializable {
+public class Korisnik extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+    
     @Basic(optional = false)
     @Column(name = "ime")
     private String ime;

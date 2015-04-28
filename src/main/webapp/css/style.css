@@ -139,3 +139,36 @@ footer{
 .form-control{
     margin-bottom: 20px;
 }
+
+.reserveCont{
+    float:left;
+    margin: 40px 35px 0px 0px;
+    width: 260px;
+    height: 150px;
+    background: rgb(184, 184, 184);
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+.reserveCont:odd{
+    margin-top: 28px;
+}
+.reserveCont h1{
+    background: rgb(232, 232, 232);
+}
+.reserveCont p{    
+    font-weight: bold;    
+}
+.price{
+    background: rgb(232, 232, 232);
+    width: 25%;
+    margin: 0 auto;
+    border-radius: 15px;
+}
+.pomCont{
+    width: 600px;
+    min-height: 400px;
+    display:block;
+    margin: 0 auto;
+    text-align: center;
+}

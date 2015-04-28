@@ -10,9 +10,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -30,13 +27,9 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 @Table(name = "rezervacije")
 @NamedQueries({
     @NamedQuery(name = "Rezervacije.findAll", query = "SELECT r FROM Rezervacije r")})
-public class Rezervacije implements Serializable {
+public class Rezervacije extends AbstractEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+    
     @Basic(optional = false)
     @Column(name = "ime")
     private String ime;
