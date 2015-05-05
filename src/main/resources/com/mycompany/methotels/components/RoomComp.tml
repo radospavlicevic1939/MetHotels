@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+>
+    <div class="roomCont">
+        <h1>${nazivSobe}</h1>
+        <img src="${slika}" height="300" width="300">
+        </img>
+        <p>Cena po danu: ${cena} E</p>
+    </div>
+</html>

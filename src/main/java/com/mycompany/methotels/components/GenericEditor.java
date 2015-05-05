@@ -10,6 +10,7 @@ import com.mycompany.methotels.entities.AbstractEntity;
 import java.util.List;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.PropertyConduit;
+import org.apache.tapestry5.annotations.PageLoaded;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.BeanModel;
@@ -31,9 +32,12 @@ public class GenericEditor<T extends AbstractEntity> {
     private GenericDao genericDao;
     @Property
     @Persist
-    private T bean;
+    private T bean;    
     @Property
     private T row;
+    @Property
+    private List<T> list;
+    
     @Inject
     private BeanModelSource beanModelSource;
     @Inject
@@ -45,9 +49,9 @@ public class GenericEditor<T extends AbstractEntity> {
         klasa = conduit1.getPropertyType();
     }
 
-    public List<T> getGrid() {
-        List<T> temp = genericDao.loadAllActive(klasa);
-        return temp;
+    @PageLoaded
+    public void onLoad() {
+        list = genericDao.loadAllActive(klasa);        
     }
 
     public BeanModel<T> getFormModel() {
@@ -62,6 +66,7 @@ public class GenericEditor<T extends AbstractEntity> {
 
     @CommitAfter
     Object onActionFromBrisanje(int id) {
+        list.remove((T) genericDao.getElementById(id, klasa));
         genericDao.delete(id, klasa);
         return this;
     }
@@ -74,7 +79,7 @@ public class GenericEditor<T extends AbstractEntity> {
 
     @CommitAfter
     public Object onSuccess() {
-        genericDao.merge(bean);
+        list.add((T) genericDao.merge(bean));
         try {
             bean = (T) klasa.newInstance();
         } catch (Exception ex) {

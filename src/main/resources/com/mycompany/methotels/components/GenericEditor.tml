@@ -3,7 +3,7 @@
                    
     <t:beaneditform object="bean" t:model="formModel" >
     </t:beaneditform>
-    <t:grid source="grid" t:model="gridModel" add="edit,brisanje" row="row">
+    <t:grid source="list" t:model="gridModel" add="edit,brisanje" row="row">
         <p:editCell>
             <t:actionlink t:id="edit" context="row">Izmeni</t:actionlink>
         </p:editCell>

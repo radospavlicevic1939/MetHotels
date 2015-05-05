@@ -1,0 +1,7 @@
+<html t:type="layout" title="Genericki editor"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+    
+    <div style="width:100%; height: 500px;">
+        <t:roomComp soba="soba" slika="${slika}"></t:roomComp>
+    </div>  
+</html>
