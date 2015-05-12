@@ -7,8 +7,11 @@ package com.mycompany.methotels.persistance;
 
 import com.mycompany.methotels.entities.Korisnik;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -66,5 +69,24 @@ public class KorisnikDaoImpl implements KorisnikDao {
         long rows = (Long) session.createCriteria(Korisnik.class).add(Restrictions.eq("username",
                 user)).setProjection(Projections.rowCount()).uniqueResult();
         return (rows != 0);
+    }
+
+    @Override
+    public List<Korisnik> getListaKorisnikaPoImenu(String ime) {
+        return session.createCriteria(Korisnik.class).add(Restrictions.or(Restrictions.ilike("ime", ime + "%"), Restrictions.ilike("prezime", ime + "%"))).list();
+    }
+
+    @Override
+    public List<Korisnik> getListaKorisnikaOd(int from) {
+        int page = (from - 1) * 5;
+        List<Korisnik> lista = session.createCriteria(Korisnik.class).setFirstResult(page).setMaxResults(5).addOrder(Order.asc("id")).
+                setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        return lista;
+    }
+
+    @Override
+    public int ukupanBrojKorisnika() {
+        Long l = (Long) session.createCriteria(Korisnik.class).setProjection(Projections.rowCount()).uniqueResult();
+        return l.intValue();
     }
 }

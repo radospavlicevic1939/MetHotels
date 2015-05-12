@@ -16,5 +16,5 @@ import javax.annotation.security.RolesAllowed;
  */
 @ProtectedPage
 @RolesAllowed(value={"Admin"})
-public class DodajKorisnika extends GenericEditor<Korisnik>{   
+public class DodajKorisnika extends GenericEditor<Korisnik>{
 }

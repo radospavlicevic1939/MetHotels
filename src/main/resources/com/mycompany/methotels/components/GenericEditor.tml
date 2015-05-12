@@ -8,7 +8,7 @@
             <t:actionlink t:id="edit" context="row">Izmeni</t:actionlink>
         </p:editCell>
         <p:brisanjeCell>
-            <t:actionlink t:id="brisanje" context="row">Izbrisi</t:actionlink>
+            <t:actionlink t:id="brisanje" context="row" t:mixins="Confirm">Izbrisi</t:actionlink>
         </p:brisanjeCell>
     </t:grid>
 </html>

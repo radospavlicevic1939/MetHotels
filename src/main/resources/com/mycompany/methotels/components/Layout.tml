@@ -57,7 +57,10 @@
                             </li>
                             <li>
                                 <t:pagelink page="DodajKorisnika">Dodavanje korisnika</t:pagelink>
-                            </li>						
+                            </li>
+                             <li>
+                                <t:pagelink page="PregledKorisnika">Pregled korisnika</t:pagelink>
+                            </li>					
                         </ul>
                     </li>												
                 </ul>

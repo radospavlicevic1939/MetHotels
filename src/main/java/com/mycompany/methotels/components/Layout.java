@@ -18,7 +18,6 @@ public class Layout {
         }
         return false;
     }
-
     public void onActionFromLogout() {
         ulogovanKorisnik = null;
     }

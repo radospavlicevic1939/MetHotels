@@ -7,6 +7,7 @@ package com.mycompany.methotels.persistance;
 
 import com.mycompany.methotels.entities.Korisnik;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,5 +28,11 @@ public interface KorisnikDao {
     public Korisnik registrujKorisnika(Korisnik user);
 
     public boolean korisnikPostoji(String email);
+    
+    public List<Korisnik> getListaKorisnikaPoImenu(String ime);
+
+    public abstract int ukupanBrojKorisnika();
+
+    public abstract List<Korisnik> getListaKorisnikaOd(int from);
 
 }
