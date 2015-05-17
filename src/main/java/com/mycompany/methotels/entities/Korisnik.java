@@ -61,15 +61,7 @@ public class Korisnik extends AbstractEntity implements Serializable {
         this.username = username;
         this.password = password;
         this.rola = rola;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    }  
 
     public String getIme() {
         return ime;

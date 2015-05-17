@@ -64,15 +64,7 @@ public class Sobe extends AbstractEntity implements Serializable {
         this.tv = tv;
         this.internet = internet;
         this.djakuzi = djakuzi;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    }  
 
     public String getIme() {
         return ime;

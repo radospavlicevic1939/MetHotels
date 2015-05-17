@@ -34,6 +34,11 @@ public class RezervacijaDaoImpl implements RezervacijaDao {
     public void dodajRezervaciju(Rezervacije soba) {
         session.persist(soba);
     }
+    
+    @Override
+    public Rezervacije dodajIliUpdatujRezervaciju(Rezervacije rezervacija){
+        return (Rezervacije) session.merge(rezervacija);
+    }
 
     @Override
     public void obrisiRezervaciju(int id) {

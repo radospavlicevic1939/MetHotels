@@ -62,15 +62,7 @@ public class Rezervacije extends AbstractEntity implements Serializable {
         this.prezime = prezime;
         this.datum = datum;
         this.brojDana = brojDana;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    }  
 
     public String getIme() {
         return ime;

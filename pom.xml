@@ -106,6 +106,12 @@
             <version>${tapestry-release-version}</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.got5</groupId>
+            <artifactId>tapestry5-jquery</artifactId>
+            <version>4.0.1-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
     <build>
@@ -170,7 +176,24 @@
         <repository>
             <id>JBoss repository</id>
             <url>http://repository.jboss.com/maven2/</url>
-        </repository>        
+        </repository>   
+        
+        <repository>
+            <id>devlab722-repo</id>
+            <url>http://nexus.devlab722.net/nexus/content/repositories/releases
+            </url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>devlab722-snapshot-repo</id>
+            <url>http://nexus.devlab722.net/nexus/content/repositories/snapshots
+            </url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>     
     </repositories>
 
     <properties>

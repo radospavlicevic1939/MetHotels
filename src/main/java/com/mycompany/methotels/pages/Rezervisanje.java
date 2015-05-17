@@ -13,10 +13,16 @@ import com.mycompany.methotels.services.ProtectedPage;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import org.apache.tapestry5.SelectModel;
+import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.json.JSONObject;
+import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.SelectModelFactory;
+import org.got5.tapestry5.jquery.components.InPlaceEditor;
 
 /**
  *
@@ -45,10 +51,16 @@ public class Rezervisanje {
     private List<Rezervacije> rezervacijeLista;
 
     @Property
-    private List<Sobe> sobeLista;
-
+    private List<Sobe> sobeLista;   
+    
     @Property
-    private Sobe soba;
+    private Sobe soba;       
+
+    @InjectComponent
+    private Zone zoneGrid;
+
+    @Inject
+    private Request request;      
 
     public void setupRender() {
         rezervacijeLista = rezervacijaDao.getListaRezervacija();
@@ -60,14 +72,18 @@ public class Rezervisanje {
     }
 
     @CommitAfter
-    void onSuccessFromRezervacijeForma() {
+    Object onSuccessFromRezervacijeForma() {
         rezervacija.setSobaId(soba);
         rezervacijaDao.dodajRezervaciju(rezervacija);
+        rezervacijeLista = rezervacijaDao.getListaRezervacija();
+        return request.isXHR() ? zoneGrid.getBody() : null;
     }
 
     @CommitAfter
-    void onDelete(Integer id) {
+    Object onDelete(Integer id) {
         rezervacijaDao.obrisiRezervaciju(id);
+        rezervacijeLista = rezervacijaDao.getListaRezervacija();
+        return request.isXHR() ? zoneGrid.getBody() : null;
     }
 
     public String getSobaIme() {
@@ -77,4 +93,37 @@ public class Rezervisanje {
             return "";
         }
     }
+    
+    @CommitAfter
+    @OnEvent(component = "ime", value = InPlaceEditor.SAVE_EVENT)
+    void changeIme(Long id, String value) {
+        Rezervacije reserve = rezervacijaDao.getRezervacijaById(id.intValue());
+        reserve.setIme(value);
+        rezervacijaDao.dodajIliUpdatujRezervaciju(reserve);
+    }
+    
+    @CommitAfter
+    @OnEvent(component = "prezime", value = InPlaceEditor.SAVE_EVENT)
+    void changePrezime(Long id, String value) {
+        Rezervacije reserve = rezervacijaDao.getRezervacijaById(id.intValue());
+        reserve.setPrezime(value);
+        rezervacijaDao.dodajIliUpdatujRezervaciju(reserve);
+    }
+    
+    @CommitAfter
+    @OnEvent(component = "brojDana", value = InPlaceEditor.SAVE_EVENT)
+    void setChangeBrojDana(Long id, Integer value) {
+        Rezervacije reserve = rezervacijaDao.getRezervacijaById(id.intValue());
+        reserve.setBrojDana(value);
+        rezervacijaDao.dodajIliUpdatujRezervaciju(reserve);
+    }
+    
+     public JSONObject getOptionsJSON() {
+        JSONObject params = new JSONObject();
+        params.put("tooltip", "Promena vrednosti");
+        params.put("height", "25px");
+        params.put("width", "80px");
+
+        return params;
+    }        
 }

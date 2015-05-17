@@ -10,14 +10,17 @@ import com.mycompany.methotels.entities.AbstractEntity;
 import java.util.List;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.PropertyConduit;
-import org.apache.tapestry5.annotations.PageLoaded;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.BeanModel;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.BeanModelSource;
 import org.apache.tapestry5.services.PropertyConduitSource;
+import org.apache.tapestry5.services.Request;
+import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 
 /**
  *
@@ -32,12 +35,24 @@ public class GenericEditor<T extends AbstractEntity> {
     private GenericDao genericDao;
     @Property
     @Persist
-    private T bean;    
+    private T bean;
     @Property
     private T row;
     @Property
     private List<T> list;
-    
+
+    @InjectComponent
+    private Zone formZone;
+
+    @InjectComponent
+    private Zone gridZone;
+
+    @Inject
+    private Request request;
+
+    @Inject
+    private AjaxResponseRenderer ajaxRenderer;
+
     @Inject
     private BeanModelSource beanModelSource;
     @Inject
@@ -49,9 +64,8 @@ public class GenericEditor<T extends AbstractEntity> {
         klasa = conduit1.getPropertyType();
     }
 
-    @PageLoaded
-    public void onLoad() {
-        list = genericDao.loadAllActive(klasa);        
+    void onActivate() {
+        list = genericDao.loadAllActive(klasa);
     }
 
     public BeanModel<T> getFormModel() {
@@ -66,24 +80,29 @@ public class GenericEditor<T extends AbstractEntity> {
 
     @CommitAfter
     Object onActionFromBrisanje(int id) {
-        list.remove((T) genericDao.getElementById(id, klasa));
         genericDao.delete(id, klasa);
-        return this;
+        list = genericDao.loadAllActive(klasa);
+        return request.isXHR() ? gridZone.getBody() : null;
     }
 
     @CommitAfter
     Object onActionFromEdit(int row) {
         bean = (T) genericDao.getElementById(row, klasa);
-        return this;
+        return request.isXHR() ? formZone.getBody() : null;
     }
 
     @CommitAfter
     public Object onSuccess() {
-        list.add((T) genericDao.merge(bean));
+        genericDao.merge(bean);
+        list = genericDao.loadAllActive(klasa);
         try {
             bean = (T) klasa.newInstance();
         } catch (Exception ex) {
         }
-        return this;
+        if (request.isXHR()) {
+            ajaxRenderer.addRender(gridZone).addRender(formZone);
+        }
+        return request.isXHR() ? gridZone.getBody() : null;
     }
+
 }

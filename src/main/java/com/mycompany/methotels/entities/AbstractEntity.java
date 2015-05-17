@@ -25,11 +25,19 @@ public class AbstractEntity implements Serializable, Comparable<AbstractEntity> 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
-    protected Integer id;   
+    protected Integer id;
 
     @Override
     public int compareTo(AbstractEntity o) {
         return this.toString().compareTo(o.toString());
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
