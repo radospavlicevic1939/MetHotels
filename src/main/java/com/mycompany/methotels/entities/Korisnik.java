@@ -15,6 +15,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 /**
@@ -22,6 +23,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
  * @author Rados
  */
 @Entity
+@XmlRootElement
 @Table(name = "korisnik")
 @NamedQueries({
     @NamedQuery(name = "Korisnik.findAll", query = "SELECT k FROM Korisnik k")})

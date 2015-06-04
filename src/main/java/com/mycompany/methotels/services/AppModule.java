@@ -8,14 +8,20 @@ import com.mycompany.methotels.persistance.RezervacijaDao;
 import com.mycompany.methotels.persistance.RezervacijaDaoImpl;
 import com.mycompany.methotels.persistance.SobeDao;
 import com.mycompany.methotels.persistance.SobeDaoImpl;
+import com.mycompany.methotels.restser.KorisnikServiceInterface;
+import com.mycompany.methotels.restser.KorisnikWebService;
 import java.io.IOException;
 
 import org.apache.tapestry5.*;
+import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.*;
@@ -33,7 +39,8 @@ public class AppModule {
         binder.bind(RezervacijaDao.class, RezervacijaDaoImpl.class);
         binder.bind(KorisnikDao.class, KorisnikDaoImpl.class);
         binder.bind(GenericDao.class, GenericDaoImpl.class);
-        
+        binder.bind(KorisnikServiceInterface.class, KorisnikWebService.class);
+
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation
@@ -147,4 +154,15 @@ public class AppModule {
         configuration.addInstance("PageProtectionFilter", PageProtectionFilter.class);
     }
 
+    @Match("*Korisnik*")
+    public static void adviseTransactionally(
+            HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver) {
+        advisor.addTransactionCommitAdvice(receiver);
+    }
+
+    @Contribute(javax.ws.rs.core.Application.class)
+    public static void configureRestResources(Configuration<Object> singletons,
+            KorisnikServiceInterface korisnikWeb) {
+        singletons.add(korisnikWeb);
+    }
 }
