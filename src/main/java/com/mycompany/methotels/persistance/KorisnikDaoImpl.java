@@ -33,6 +33,11 @@ public class KorisnikDaoImpl implements KorisnikDao {
     public Korisnik getKorisnikById(Integer id) {
         return (Korisnik) session.createCriteria(Korisnik.class).add(Restrictions.eq("id", id)).uniqueResult();
     }
+    
+    @Override
+    public Korisnik getKorisnikByUsername(String username){
+        return (Korisnik) session.createCriteria(Korisnik.class).add(Restrictions.eq("username", username)).uniqueResult();
+    }
 
     @Override
     public void dodajKorisnika(Korisnik korisnik) {

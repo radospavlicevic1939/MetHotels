@@ -17,7 +17,9 @@ public interface KorisnikDao {
 
     public ArrayList<Korisnik> getListaSvihKorisnika();
 
-    public Korisnik getKorisnikById(Integer id);
+    public Korisnik getKorisnikById(Integer id); 
+    
+    public Korisnik getKorisnikByUsername(String username);
 
     public void dodajKorisnika(Korisnik korisnik);
 

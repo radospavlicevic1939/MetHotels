@@ -47,6 +47,9 @@ public class Korisnik extends AbstractEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "rola")
     private Rola rola;
+    @Column(name = "FACEBOOK_ID")
+    private String facebookId;
+
 
     @Inject
     public Korisnik() {
@@ -54,6 +57,13 @@ public class Korisnik extends AbstractEntity implements Serializable {
 
     public Korisnik(Integer id) {
         this.id = id;
+    }
+    
+    public Korisnik(String username, String password, Rola rola, String facebookId){
+        this.username = username;
+        this.password = password;
+        this.rola = rola;
+        this.facebookId = facebookId;
     }
 
     public Korisnik(Integer id, String ime, String prezime, String username, String password, Rola rola) {

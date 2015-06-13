@@ -11,6 +11,8 @@ import com.mycompany.methotels.persistance.SobeDaoImpl;
 import com.mycompany.methotels.restser.KorisnikServiceInterface;
 import com.mycompany.methotels.restser.KorisnikWebService;
 import java.io.IOException;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.realm.Realm;
 
 import org.apache.tapestry5.*;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
@@ -20,12 +22,15 @@ import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.InjectService;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.*;
 import org.slf4j.Logger;
+import org.tynamo.security.services.SecurityFilterChainFactory;
+import org.tynamo.security.services.impl.SecurityFilterChain;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry,
@@ -40,6 +45,8 @@ public class AppModule {
         binder.bind(KorisnikDao.class, KorisnikDaoImpl.class);
         binder.bind(GenericDao.class, GenericDaoImpl.class);
         binder.bind(KorisnikServiceInterface.class, KorisnikWebService.class);
+        binder.bind(FacebookService.class);
+        binder.bind(AuthorizingRealm.class, KorisnikRealm.class).withId(KorisnikRealm.class.getSimpleName());
 
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
         // Make bind() calls on the binder object to define most IoC services.
@@ -165,4 +172,23 @@ public class AppModule {
             KorisnikServiceInterface korisnikWeb) {
         singletons.add(korisnikWeb);
     }
+
+    public static void contributeWebSecurityManager(Configuration<Realm> configuration,
+            @InjectService("KorisnikRealm") AuthorizingRealm userRealm) {
+        configuration.add(userRealm);
+    }
+
+    public static void contributeHttpServletRequestHandler(
+            @InjectService("SecurityConfiguration") HttpServletRequestFilter securityConfiguration,
+            OrderedConfiguration<HttpServletRequestFilter> filters) {
+        filters.override("SecurityConfiguration", securityConfiguration,
+                "before:ResteasyRequestFilter,after:StoreIntoGlobals");
+    }
+
+    public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
+                    SecurityFilterChainFactory factory) {
+        // /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
+        configuration.add(factory.createChain("/rest/**").add(factory.basic()).build());
+    }
+
 }

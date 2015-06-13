@@ -5,6 +5,7 @@
  */
 package com.mycompany.methotels.pages;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.tapestry5.annotations.Import;
 
 /**
@@ -12,5 +13,6 @@ import org.apache.tapestry5.annotations.Import;
  * @author Rados
  */
 @Import(library = "context:/js/pretraga_paginacija.js", stylesheet = "context:css/style.css")
+@RequiresRoles("Admin")
 public class PregledKorisnika {
 }

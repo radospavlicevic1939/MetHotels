@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
 /**
@@ -27,6 +28,7 @@ public interface KorisnikServiceInterface {
     @Produces({"application/json"})
     public List<Korisnik> getAll();
 
+    @RequiresAuthentication
     @GET
     @Path("{id}")
     @Produces({"application/json"})
@@ -37,5 +39,4 @@ public interface KorisnikServiceInterface {
     @Produces({"application/json"})
     @Consumes({"application/json"})
     public Response post(Korisnik korisnik);
-
 }
